@@ -8,7 +8,7 @@ import {ContactsList} from "./ContactsList/ContactsList";
 import {Filter} from "./Filter/Filter";
 import css from "./App.module.css"; // підключення стилів
 
-const CONTACTS = 'contacts'; // ключ для localStorage
+// const CONTACTS = 'contacts'; // ключ для localStorage
 
 export class App extends Component {
 
@@ -24,7 +24,7 @@ state = {
 }
 
 componentDidMount() {
-  const contactsStorage =  localStorage.getItem (CONTACTS);
+  const contactsStorage =  localStorage.getItem ('contacts');
   
 
   if (contactsStorage !== null) {
@@ -39,15 +39,7 @@ componentDidMount() {
 
 
 componentDidUpdate(_, prevState) {
-
-  // console.log(`Стало ${this.state.contacts}`);
-  // console.log(`В записе ${prevState.contacts}`);
-  // якщо контакти змінились, то записуємо їх в localStorage
-  if (prevState.contacts !== this.state.contacts) {
-    console.log("запис");
-    localStorage.setItem( CONTACTS, JSON.stringify(this.state.contacts) // перетворюємо масив в JSON
-    );
-  }
+    localStorage.setItem( 'contacts', JSON.stringify(this.state.contacts)); // перетворюємо масив в JSON
 }
 
 // INPUT - зберігаємо данні при вводі текста в input
