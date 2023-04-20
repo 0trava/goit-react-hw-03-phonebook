@@ -27,7 +27,7 @@ componentDidMount() {
   const contactsStorage =  localStorage.getItem (CONTACTS);
   
 
-  if (contactsStorage) {
+  if (contactsStorage !== null) {
     const contactslist = JSON.parse(contactsStorage);
     this.setState({contacts: contactslist})
   } 
@@ -39,11 +39,13 @@ componentDidMount() {
 
 
 componentDidUpdate(_, prevState) {
+
+  // console.log(`Стало ${this.state.contacts}`);
+  // console.log(`В записе ${prevState.contacts}`);
   // якщо контакти змінились, то записуємо їх в localStorage
   if (prevState.contacts !== this.state.contacts) {
-    localStorage.setItem(
-      CONTACTS,
-      JSON.stringify(this.state.contacts) // перетворюємо масив в JSON
+    console.log("запис");
+    localStorage.setItem( CONTACTS, JSON.stringify(this.state.contacts) // перетворюємо масив в JSON
     );
   }
 }
@@ -64,7 +66,7 @@ addContact = ({ name, number }) => {
       alert(`"${name}" is already in contacts`); // повідомлення, що такий контакт вже існує
     } else {
       list.push({id:newId, name: name, number: number}); // додаємо до масиву данних
-      this.setState({contacts: list}); // ререндиримо сторінку
+      return this.setState({contacts: list}); // ререндиримо сторінку
     }
   }
 
