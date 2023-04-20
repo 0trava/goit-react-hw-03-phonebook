@@ -8,6 +8,8 @@ import {ContactsList} from "./ContactsList/ContactsList";
 import {Filter} from "./Filter/Filter";
 import css from "./App.module.css"; // підключення стилів
 
+const CONTACTS = 'contacts'; // ключ для localStorage
+
 export class App extends Component {
 
 // ДАННІ - Ввідні данні по ТЗ 
@@ -19,6 +21,31 @@ state = {
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
   ],
   filter: '',
+}
+
+componentDidMount() {
+  const contactsStorage =  localStorage.getItem (CONTACTS);
+  
+
+  if (contactsStorage) {
+    const contactslist = JSON.parse(contactsStorage);
+    this.setState({contacts: contactslist})
+  } 
+  // else {
+  //   this.setState({ contacts: initialContacts });
+  // };
+  
+}
+
+
+componentDidUpdate(_, prevState) {
+  // якщо контакти змінились, то записуємо їх в localStorage
+  if (prevState.contacts !== this.state.contacts) {
+    localStorage.setItem(
+      CONTACTS,
+      JSON.stringify(this.state.contacts) // перетворюємо масив в JSON
+    );
+  }
 }
 
 // INPUT - зберігаємо данні при вводі текста в input
