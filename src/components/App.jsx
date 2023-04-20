@@ -25,15 +25,11 @@ state = {
 
 componentDidMount() {
   const contactsStorage =  localStorage.getItem ('contacts');
-  
 
   if (contactsStorage !== null) {
     const contactslist = JSON.parse(contactsStorage);
     this.setState({contacts: contactslist})
   } 
-  // else {
-  //   this.setState({ contacts: initialContacts });
-  // };
   
 }
 
